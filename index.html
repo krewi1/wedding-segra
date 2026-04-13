@@ -73,16 +73,26 @@
     <!-- Header -->
     <header class="bg-white">
         <div class="max-w-6xl mx-auto px-4 pt-6 pb-4">
-            <h1 class="text-center font-serif text-3xl md:text-4xl tracking-widest mb-4">PETR <span class="font-sans font-light">&</span> PETRA</h1>
-            <nav class="flex flex-wrap items-center justify-between">
-                <ul class="flex space-x-6 text-xs tracking-[0.2em] uppercase font-medium">
-                    <li><a href="#countdown" class="hover:text-olive-600 transition">Úvod</a></li>
-                    <li><a href="#svatba" class="hover:text-olive-600 transition">Svatba</a></li>
-                    <li><a href="#harmonogram" class="hover:text-olive-600 transition">Harmonogram</a></li>
-                    <li><a href="#dotaznik" class="hover:text-olive-600 transition">Dotazník</a></li>
-                    <li><a href="#mapa" class="hover:text-olive-600 transition">Mapa</a></li>
-                </ul>
-                <a href="#dotaznik" class="btn-outline hidden md:inline-block">Dorazíte? &rarr;</a>
+            <div class="flex items-center justify-between md:justify-center mb-4">
+                <h1 class="font-serif text-3xl md:text-4xl tracking-widest">PETR <span class="font-sans font-light">&</span> PETRA</h1>
+                <!-- Hamburger button (mobile only) -->
+                <button id="menuToggle" class="md:hidden p-2 relative w-10 h-10" aria-label="Menu">
+                    <span class="menu-line absolute left-2 right-2 h-0.5 bg-gray-800 rounded transition-all duration-500 ease-in-out" style="top: 12px;"></span>
+                    <span class="menu-line absolute left-2 right-2 h-0.5 bg-gray-800 rounded transition-all duration-500 ease-in-out" style="top: 19px;"></span>
+                    <span class="menu-line absolute left-2 right-2 h-0.5 bg-gray-800 rounded transition-all duration-500 ease-in-out" style="top: 26px;"></span>
+                </button>
+            </div>
+            <nav id="mainNav" class="hidden md:block">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-center md:space-x-8 space-y-4 md:space-y-0 py-4 md:py-0">
+                    <ul class="flex flex-col md:flex-row md:space-x-6 space-y-3 md:space-y-0 text-xs tracking-[0.2em] uppercase font-medium text-center">
+                        <li><a href="#countdown" class="hover:text-olive-600 transition">Úvod</a></li>
+                        <li><a href="#svatba" class="hover:text-olive-600 transition">Svatba</a></li>
+                        <li><a href="#harmonogram" class="hover:text-olive-600 transition">Harmonogram</a></li>
+                        <li><a href="#dotaznik" class="hover:text-olive-600 transition">Dotazník</a></li>
+                        <li><a href="#mapa" class="hover:text-olive-600 transition">Mapa</a></li>
+                    </ul>
+                    <a href="#dotaznik" class="btn-outline text-center">Dorazíte? &rarr;</a>
+                </div>
             </nav>
         </div>
     </header>
@@ -430,6 +440,44 @@
             // Remove extra attendee rows
             const rows = attendeesContainer.querySelectorAll('.attendee-row');
             rows.forEach((row, i) => { if (i > 0) row.remove(); });
+        });
+        // Mobile menu toggle with hamburger <-> X animation
+        const menuToggle = document.getElementById('menuToggle');
+        const mainNav = document.getElementById('mainNav');
+        const lines = menuToggle.querySelectorAll('.menu-line');
+
+        function setMenuIcon(open) {
+            if (open) {
+                lines[0].style.top = '19px';
+                lines[0].style.transform = 'rotate(45deg)';
+                lines[1].style.opacity = '0';
+                lines[1].style.transform = 'scaleX(0)';
+                lines[2].style.top = '19px';
+                lines[2].style.transform = 'rotate(-45deg)';
+            } else {
+                lines[0].style.top = '12px';
+                lines[0].style.transform = 'rotate(0)';
+                lines[1].style.opacity = '1';
+                lines[1].style.transform = 'scaleX(1)';
+                lines[2].style.top = '26px';
+                lines[2].style.transform = 'rotate(0)';
+            }
+        }
+
+        menuToggle.addEventListener('click', function() {
+            const opening = mainNav.classList.contains('hidden');
+            mainNav.classList.toggle('hidden');
+            setMenuIcon(opening);
+        });
+
+        // Close menu when a nav link is clicked (mobile)
+        mainNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth < 768) {
+                    mainNav.classList.add('hidden');
+                    setMenuIcon(false);
+                }
+            });
         });
     </script>
 </body>
