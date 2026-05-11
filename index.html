@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Petr & Petra - Svatební web</title>
+    <title>Péťa s Péťou - Svatební web</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,9 +38,30 @@
         html { scroll-behavior: smooth; }
 
         .hero-section {
-            background: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.3)),
-                url('images/hero.jpg') center/cover no-repeat;
+            position: relative;
             min-height: 80vh;
+            overflow: hidden;
+        }
+
+        .hero-section picture,
+        .hero-section picture img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.3));
+        }
+
+        .hero-section .hero-content {
+            position: relative;
+            z-index: 1;
         }
 
         .swoosh-top {
@@ -74,7 +95,7 @@
     <header class="bg-white">
         <div class="max-w-6xl mx-auto px-4 pt-6 pb-4">
             <div class="flex items-center justify-between md:justify-center mb-4">
-                <h1 class="font-serif text-3xl md:text-4xl tracking-widest">PETR <span class="font-sans font-light">&</span> PETRA</h1>
+                <h1 class="font-serif text-3xl md:text-4xl tracking-widest">PÉŤA <span class="font-sans font-light">s</span> PÉŤOU</h1>
                 <!-- Hamburger button (mobile only) -->
                 <button id="menuToggle" class="md:hidden p-2 relative w-10 h-10" aria-label="Menu">
                     <span class="menu-line absolute left-2 right-2 h-0.5 bg-gray-800 rounded transition-all duration-500 ease-in-out" style="top: 12px;"></span>
@@ -99,15 +120,21 @@
 
     <!-- Hero Section -->
     <section id="uvod" class="hero-section flex items-center justify-center text-center text-white">
-        <div class="px-4">
-            <p class="text-sm md:text-base tracking-[0.3em] uppercase mb-4 font-light">Vítejte na našem svatebním webu</p>
-            <h2 class="font-serif text-5xl md:text-7xl lg:text-8xl tracking-wide">PETR <span class="font-sans font-light">&</span> PETRA</h2>
+        <picture>
+            <source media="(min-width: 1200px)" srcset="images/hero-lg.webp">
+            <source media="(min-width: 768px)" srcset="images/hero.webp">
+            <img src="images/hero-sm.webp" alt="Péťa s Péťou" loading="eager">
+        </picture>
+        <div class="px-4 max-w-2xl hero-content">
+            <h2 class="font-serif text-3xl md:text-5xl tracking-wide mb-6">Vítejte na našem svatebním webu</h2>
+            <p class="text-base md:text-lg font-light mb-8">Vyplňte prosím náš svatební dotazník.</p>
+            <a href="#dotaznik" class="inline-block border border-white rounded-full px-8 py-3 text-xs tracking-[0.15em] uppercase font-medium hover:bg-white hover:text-gray-800 transition">Dotazník &rarr;</a>
         </div>
     </section>
 
     <!-- Countdown Section -->
     <section id="countdown" class="py-16 md:py-24 bg-white text-center">
-        <h3 class="font-serif text-xl md:text-2xl tracking-[0.15em] uppercase mb-10">Již brzy to spolu oslavíme!</h3>
+        <h3 class="font-serif text-xl md:text-2xl tracking-[0.15em] uppercase mb-10">Už brzo to oslavíme!</h3>
         <div class="flex justify-center items-center space-x-4 md:space-x-8 text-center">
             <div>
                 <span class="block text-5xl md:text-7xl font-light" id="days">000</span>
@@ -145,9 +172,7 @@
                         </div>
                         <h4 class="font-serif text-lg tracking-[0.15em] uppercase mb-4">Datum</h4>
                         <p class="text-sm leading-relaxed text-gray-600">
-                            11. 07. 2026<br>
-                            Obřad od 12:00 hod<br>
-                            Brušovec 342, Herálec pod Žákovou horou
+                            11. 07. 2026
                         </p>
                     </div>
                     <!-- Místo -->
@@ -171,10 +196,9 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
                             </svg>
                         </div>
-                        <h4 class="font-serif text-lg tracking-[0.15em] uppercase mb-4">Dress code - Formální</h4>
+                        <h4 class="font-serif text-lg tracking-[0.15em] uppercase mb-4">Dresscode</h4>
                         <p class="text-sm leading-relaxed text-gray-600">
-                            Oslava bude probíhat na zahradě,<br>
-                            myslete na to při výběru obuvi.
+                            Zvolte formální oblečení v barvě, ve které se cítíte dobře.
                         </p>
                     </div>
                 </div>
@@ -185,7 +209,7 @@
     <!-- Harmonogram -->
     <section id="harmonogram" class="py-16 md:py-24 bg-white">
         <div class="max-w-3xl mx-auto px-4">
-            <h3 class="font-serif text-2xl md:text-3xl tracking-[0.15em] uppercase text-center mb-12">Harmonogram dne</h3>
+            <h3 class="font-serif text-2xl md:text-3xl tracking-[0.15em] uppercase text-center mb-12">Harmonogram svatebního dne</h3>
             <div class="relative">
                 <!-- Timeline line -->
                 <div class="absolute left-1/2 transform -translate-x-px top-0 bottom-0 w-0.5 bg-gray-200 hidden md:block"></div>
@@ -195,56 +219,71 @@
                     <!-- Item 1 -->
                     <div class="flex flex-col md:flex-row items-center md:items-start">
                         <div class="md:w-1/2 md:text-right md:pr-10 mb-2 md:mb-0">
-                            <span class="font-serif text-2xl">12:00</span>
+                            <span class="font-serif text-2xl">10:00</span>
                         </div>
                         <div class="hidden md:flex items-center justify-center w-4 h-4 bg-black rounded-full z-10 mt-2 flex-shrink-0"></div>
                         <div class="md:w-1/2 md:pl-10 text-center md:text-left">
-                            <h4 class="font-semibold text-sm uppercase tracking-[0.15em] mb-1">Svatební obřad</h4>
-                            <p class="text-sm text-gray-500">Brušovec 342, Herálec pod Žákovou horou</p>
+                            <h4 class="font-semibold text-sm uppercase tracking-[0.15em]">Příjezd hostů</h4>
                         </div>
                     </div>
                     <!-- Item 2 -->
                     <div class="flex flex-col md:flex-row items-center md:items-start">
                         <div class="md:w-1/2 md:text-right md:pr-10 mb-2 md:mb-0">
-                            <span class="font-serif text-2xl">13:00</span>
+                            <span class="font-serif text-2xl">11:00</span>
                         </div>
                         <div class="hidden md:flex items-center justify-center w-4 h-4 bg-black rounded-full z-10 mt-2 flex-shrink-0"></div>
                         <div class="md:w-1/2 md:pl-10 text-center md:text-left">
-                            <h4 class="font-semibold text-sm uppercase tracking-[0.15em] mb-1">Příjezd na zahradu</h4>
-                            <p class="text-sm text-gray-500">Brušovec 342, Herálec pod Žákovou horou</p>
+                            <h4 class="font-semibold text-sm uppercase tracking-[0.15em]">Obřad</h4>
                         </div>
                     </div>
                     <!-- Item 3 -->
                     <div class="flex flex-col md:flex-row items-center md:items-start">
                         <div class="md:w-1/2 md:text-right md:pr-10 mb-2 md:mb-0">
-                            <span class="font-serif text-2xl">13:30</span>
+                            <span class="font-serif text-2xl">12:30</span>
                         </div>
                         <div class="hidden md:flex items-center justify-center w-4 h-4 bg-black rounded-full z-10 mt-2 flex-shrink-0"></div>
                         <div class="md:w-1/2 md:pl-10 text-center md:text-left">
-                            <h4 class="font-semibold text-sm uppercase tracking-[0.15em] mb-1">Společný oběd</h4>
-                            <p class="text-sm text-gray-500">Raut na zahradě</p>
+                            <h4 class="font-semibold text-sm uppercase tracking-[0.15em]">Oběd</h4>
                         </div>
                     </div>
                     <!-- Item 4 -->
                     <div class="flex flex-col md:flex-row items-center md:items-start">
                         <div class="md:w-1/2 md:text-right md:pr-10 mb-2 md:mb-0">
-                            <span class="font-serif text-2xl">15:00</span>
+                            <span class="font-serif text-2xl">15:30</span>
                         </div>
                         <div class="hidden md:flex items-center justify-center w-4 h-4 bg-black rounded-full z-10 mt-2 flex-shrink-0"></div>
                         <div class="md:w-1/2 md:pl-10 text-center md:text-left">
-                            <h4 class="font-semibold text-sm uppercase tracking-[0.15em] mb-1">Krájení dortu</h4>
-                            <p class="text-sm text-gray-500">Společné focení & zábava</p>
+                            <h4 class="font-semibold text-sm uppercase tracking-[0.15em]">Krájení svatebního dortu</h4>
                         </div>
                     </div>
                     <!-- Item 5 -->
                     <div class="flex flex-col md:flex-row items-center md:items-start">
                         <div class="md:w-1/2 md:text-right md:pr-10 mb-2 md:mb-0">
-                            <span class="font-serif text-2xl">18:00</span>
+                            <span class="font-serif text-2xl">17:30</span>
                         </div>
                         <div class="hidden md:flex items-center justify-center w-4 h-4 bg-black rounded-full z-10 mt-2 flex-shrink-0"></div>
                         <div class="md:w-1/2 md:pl-10 text-center md:text-left">
-                            <h4 class="font-semibold text-sm uppercase tracking-[0.15em] mb-1">Večerní párty</h4>
-                            <p class="text-sm text-gray-500">Hudba, tanec a oslava do noci</p>
+                            <h4 class="font-semibold text-sm uppercase tracking-[0.15em]">Házení kytice</h4>
+                        </div>
+                    </div>
+                    <!-- Item 6 -->
+                    <div class="flex flex-col md:flex-row items-center md:items-start">
+                        <div class="md:w-1/2 md:text-right md:pr-10 mb-2 md:mb-0">
+                            <span class="font-serif text-2xl">20:00</span>
+                        </div>
+                        <div class="hidden md:flex items-center justify-center w-4 h-4 bg-black rounded-full z-10 mt-2 flex-shrink-0"></div>
+                        <div class="md:w-1/2 md:pl-10 text-center md:text-left">
+                            <h4 class="font-semibold text-sm uppercase tracking-[0.15em]">První tanec</h4>
+                        </div>
+                    </div>
+                    <!-- Item 7 -->
+                    <div class="flex flex-col md:flex-row items-center md:items-start">
+                        <div class="md:w-1/2 md:text-right md:pr-10 mb-2 md:mb-0">
+                            <span class="font-serif text-2xl">21:30</span>
+                        </div>
+                        <div class="hidden md:flex items-center justify-center w-4 h-4 bg-black rounded-full z-10 mt-2 flex-shrink-0"></div>
+                        <div class="md:w-1/2 md:pl-10 text-center md:text-left">
+                            <h4 class="font-semibold text-sm uppercase tracking-[0.15em]">Párty</h4>
                         </div>
                     </div>
                 </div>
@@ -258,10 +297,7 @@
             <div class="max-w-2xl mx-auto px-4">
                 <div class="text-center mb-10">
                     <p class="text-xs tracking-[0.2em] uppercase mb-2 text-gray-500">Dorazíte?</p>
-                    <h3 class="font-serif text-3xl md:text-4xl tracking-wide uppercase mb-4">Dejte nám vědět!</h3>
-                    <p class="text-sm text-gray-600 max-w-md mx-auto">
-                        Budeme rádi, když nám dáte vědět, zda na svatbu dorazíte a případně v jakém počtu. Nemůžeme se dočkat!
-                    </p>
+                    <h3 class="font-serif text-3xl md:text-4xl tracking-wide uppercase">Dejte nám vědět!</h3>
                 </div>
 
                 <form id="rsvpForm" class="bg-white rounded-sm shadow-sm p-8 md:p-10">
@@ -289,28 +325,47 @@
 
                     <!-- Attendance -->
                     <div class="mb-6">
-                        <label class="block text-xs uppercase tracking-[0.15em] font-medium mb-3">Zúčastníte se?</label>
+                        <label class="block text-xs uppercase tracking-[0.15em] font-medium mb-3">Zúčastníš / Zúčastníte se?</label>
                         <div class="flex space-x-6">
                             <label class="flex items-center space-x-2 cursor-pointer">
-                                <input type="radio" name="fi-text-attendance" value="Ano, dorazíme" required class="accent-gray-800">
-                                <span class="text-sm">Ano, dorazíme</span>
+                                <input type="radio" name="fi-text-attendance" value="Ano, dorazím/e" required class="accent-gray-800">
+                                <span class="text-sm">Ano, dorazím/e</span>
                             </label>
                             <label class="flex items-center space-x-2 cursor-pointer">
-                                <input type="radio" name="fi-text-attendance" value="Bohužel nemůžeme" class="accent-gray-800">
-                                <span class="text-sm">Bohužel nemůžeme</span>
+                                <input type="radio" name="fi-text-attendance" value="Bohužel nemůžu / nemůžeme" class="accent-gray-800">
+                                <span class="text-sm">Bohužel nemůžu / nemůžeme</span>
                             </label>
                         </div>
                     </div>
 
                     <!-- Dietary restrictions -->
                     <div class="mb-6">
-                        <label class="block text-xs uppercase tracking-[0.15em] font-medium mb-2">Stravovací omezení / alergie</label>
+                        <label class="block text-xs uppercase tracking-[0.15em] font-medium mb-2">Stravovací specifika / alergie</label>
                         <textarea name="fi-text-dietary" rows="3" class="w-full border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:border-gray-800 transition resize-none" placeholder="Např. vegetarián, bezlepková dieta..."></textarea>
+                    </div>
+
+                    <!-- Overnight -->
+                    <div class="mb-6">
+                        <label class="block text-xs uppercase tracking-[0.15em] font-medium mb-3">Až přijde noc, tak:</label>
+                        <div class="space-y-2">
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="radio" name="fi-text-overnight" value="Přespím/e (Společný prostor v chalupě / stan)" class="accent-gray-800">
+                                <span class="text-sm">Přespím/e (Společný prostor v chalupě / stan)</span>
+                            </label>
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="radio" name="fi-text-overnight" value="Využiju/využijeme rozvoz po okolí" class="accent-gray-800">
+                                <span class="text-sm">Využiju/využijeme rozvoz po okolí</span>
+                            </label>
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="radio" name="fi-text-overnight" value="Zařídím/e se po vlastní ose" class="accent-gray-800">
+                                <span class="text-sm">Zařídím/e se po vlastní ose</span>
+                            </label>
+                        </div>
                     </div>
 
                     <!-- Message -->
                     <div class="mb-8">
-                        <label class="block text-xs uppercase tracking-[0.15em] font-medium mb-2">Vzkaz pro novomanžele</label>
+                        <label class="block text-xs uppercase tracking-[0.15em] font-medium mb-2">Vzkaz pro novomanžele / speciální požadavky</label>
                         <textarea name="fi-text-message" rows="3" class="w-full border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:border-gray-800 transition resize-none" placeholder="Volitelné..."></textarea>
                     </div>
 
@@ -345,7 +400,7 @@
     <!-- Footer -->
     <footer class="bg-white py-10">
         <div class="max-w-4xl mx-auto px-4 text-center">
-            <h4 class="font-serif text-xl tracking-widest">PETR <span class="font-sans font-light">&</span> PETRA</h4>
+            <h4 class="font-serif text-xl tracking-widest">Těšíme se na Vás!</h4>
         </div>
     </footer>
 
@@ -355,7 +410,7 @@
     <!-- Scripts -->
     <script>
         // Countdown
-        const weddingDate = new Date('2026-07-11T12:00:00').getTime();
+        const weddingDate = new Date('2026-07-11T11:00:00').getTime();
 
         function updateCountdown() {
             const now = new Date().getTime();
