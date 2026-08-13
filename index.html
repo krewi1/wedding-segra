@@ -312,9 +312,12 @@
             facade.prepend(thumb);
 
             facade.addEventListener('click', function() {
+                // Parametry podle oficiálního embed kódu z YouTube. Bez referrerPolicy
+                // vrací přehrávač na ostré doméně chybu 153.
                 const iframe = document.createElement('iframe');
-                iframe.src = 'https://www.youtube-nocookie.com/embed/' + videoId + '?autoplay=1&rel=0';
+                iframe.src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0';
                 iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+                iframe.referrerPolicy = 'strict-origin-when-cross-origin';
                 iframe.allowFullscreen = true;
                 iframe.title = facade.getAttribute('aria-label') || 'Svatební video';
                 facade.replaceWith(iframe);
